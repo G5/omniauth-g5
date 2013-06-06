@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = G5Omniauth::VERSION
   gem.authors       = ["maeve"]
   gem.email         = ["maeve.revels@getg5.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{OmniAuth strategy for G5}
+  gem.summary       = %q{OmniAuth strategy for G5}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
