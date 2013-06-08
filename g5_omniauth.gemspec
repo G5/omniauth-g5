@@ -5,7 +5,7 @@ require 'g5_omniauth/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "g5_omniauth"
-  gem.version       = G5Omniauth::VERSION
+  gem.version       = G5OmniAuth::VERSION
   gem.authors       = ["maeve"]
   gem.email         = ["maeve.revels@getg5.com"]
   gem.description   = %q{OmniAuth strategy for G5}
@@ -16,6 +16,8 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
+
+  gem.add_dependency('omniauth-oauth2', '~> 1.1')
 
   gem.add_development_dependency('rspec', '~> 2.11')
 end

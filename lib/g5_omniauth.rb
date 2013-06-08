@@ -1,5 +1,2 @@
-require "g5_omniauth/version"
-
-module G5Omniauth
-  # Your code goes here...
-end
+require 'g5_omniauth/version'
+require 'omniauth/strategies/g5'
