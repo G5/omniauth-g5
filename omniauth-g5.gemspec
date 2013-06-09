@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'g5_omniauth/version'
+require 'omniauth-g5/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "g5_omniauth"
-  gem.version       = G5OmniAuth::VERSION
+  gem.name          = "omniauth-g5"
+  gem.version       = OmniAuth::G5::VERSION
   gem.authors       = ["maeve"]
   gem.email         = ["maeve.revels@getg5.com"]
   gem.description   = %q{OmniAuth strategy for G5}

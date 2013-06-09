@@ -1,18 +1,21 @@
 # G5 OmniAuth
 
-This is the OmniAuth strategy for authenticating to the g5-authentication
-server.
+This is the [OmniAuth][omniauth] strategy for authenticating to G5 via
+[OAuth 2.0][oauth].
+
+ [omniauth]: https://github.com/intridea/omniauth
+ [oauth]: http://oauth.net/2/
 
 ## Requirements
 
 * A G5 Application ID and secret
-* Add the g5 private gem server at gemfury as a gem source
+* Add the G5 private gem server at gemfury as a gem source
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'g5_omniauth'
+    gem 'omniauth-g5'
 
 And then execute:
 
@@ -20,7 +23,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install g5_omniauth
+    $ gem install omniauth-g5
 
 ## Usage
 
@@ -42,4 +45,4 @@ TODO: Write usage instructions here
 7. Create new Pull Request
 
 If you find bugs, have feature requests or questions, please
-[file an issue](https://github.com/g5search/g5_omniauth/issues).
+[file an issue](https://github.com/g5search/omniauth-g5/issues).

@@ -1,4 +1,4 @@
-require 'g5_omniauth'
+require 'omniauth-g5'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
