@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe OmniAuth::Strategies::G5 do
-  before { OmniAuth.config.test_mode = true }
-  after { OmniAuth.config.test_mode = false }
-
   subject { strategy }
   let(:strategy) { OmniAuth::Strategies::G5.new(rack_app, app_id, app_secret, options) }
 
@@ -11,6 +8,11 @@ describe OmniAuth::Strategies::G5 do
   let(:app_id) { 'test_app' }
   let(:app_secret) { '1234567890qwerty' }
   let(:options) { Hash.new }
+
+  let(:access_token) { mock(:access_token, :get => response) }
+  let(:response) { mock(:response, :parsed => parsed_response) }
+  let(:parsed_response) { mock(:parsed_response) }
+  before { strategy.stub(:access_token => access_token) }
 
   its(:name) { should == :g5 }
 
@@ -41,6 +43,13 @@ describe OmniAuth::Strategies::G5 do
   end
 
   describe '#raw_info' do
+    subject(:raw_info) { strategy.raw_info }
 
+    it 'should retrieve the user info from the server' do
+      access_token.should_receive(:get).with('/v1/me.json').and_return(response)
+      raw_info
+    end
+
+    it { should == parsed_response }
   end
 end
