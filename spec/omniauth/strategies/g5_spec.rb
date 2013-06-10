@@ -30,6 +30,7 @@ describe OmniAuth::Strategies::G5 do
     context 'with default options' do
       its(:site) { should == 'https://auth.g5search.com' }
       its(:authorize_url) { should == '/oauth/authorize' }
+      its(:token_url) { should == '/oauth/token' }
     end
 
     context 'with partially overridden options' do
@@ -39,6 +40,7 @@ describe OmniAuth::Strategies::G5 do
 
       its(:site) { should == 'https://custom.app.com' }
       its(:authorize_url) { should == '/oauth/authorize' }
+      its(:token_url) { should == '/oauth/token' }
     end
   end
 
@@ -51,5 +53,23 @@ describe OmniAuth::Strategies::G5 do
     end
 
     it { should == parsed_response }
+  end
+
+  describe '#uid' do
+    subject(:uid) { strategy.uid }
+    let(:parsed_response) do
+      {'id' => 123}
+    end
+
+    it { should == 123 }
+  end
+
+  describe '#info' do
+    subject(:info) { strategy.info }
+    let(:parsed_response) do
+      {'email' => 'test@test.com'}
+    end
+
+    its([:email]) { should == 'test@test.com' }
   end
 end
