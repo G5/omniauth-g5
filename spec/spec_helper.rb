@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'omniauth-g5'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
