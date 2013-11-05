@@ -5,7 +5,7 @@ namespace :g5 do
   task :export_users, [:client_id, :client_secret, :client_callback_url, :endpoint, :authorization_code] => :environment do |t, args|
     require 'users/user_export'
     args.with_defaults(:client_id => ENV['G5_AUTH_CLIENT_ID'],
-                       :client_secret => '51f4a26a3f931739fe52e47fcebffcc4615693b49bc83fe3bea915cbe0890c3b',
+                       :client_secret => ENV['G5_AUTH_CLIENT_SECRET'],
                        :client_callback_url => 'urn:ietf:wg:oauth:2.0:oob',
                        :endpoint => 'http://192.168.33.1:4000/oauth',
                        :authorization_code => '04224ef5f7c822eb3c7de51424a3d69a4923708c1684320f9d63227e81549371')
