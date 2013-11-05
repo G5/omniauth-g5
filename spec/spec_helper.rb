@@ -1,7 +1,11 @@
+require 'pry'
+
 require 'simplecov'
 SimpleCov.start
 
 require 'omniauth-g5'
+
+Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |f| require f }
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

@@ -4,14 +4,14 @@ describe OmniAuth::Strategies::G5 do
   subject { strategy }
   let(:strategy) { OmniAuth::Strategies::G5.new(rack_app, app_id, app_secret, options) }
 
-  let(:rack_app) { mock(:rack_app) }
+  let(:rack_app) { double(:rack_app) }
   let(:app_id) { 'test_app' }
   let(:app_secret) { '1234567890qwerty' }
   let(:options) { Hash.new }
 
-  let(:access_token) { mock(:access_token, :get => response) }
-  let(:response) { mock(:response, :parsed => parsed_response) }
-  let(:parsed_response) { mock(:parsed_response) }
+  let(:access_token) { double(:access_token, :get => response) }
+  let(:response) { double(:response, :parsed => parsed_response) }
+  let(:parsed_response) { double(:parsed_response) }
   before { strategy.stub(:access_token => access_token) }
 
   its(:name) { should == :g5 }
