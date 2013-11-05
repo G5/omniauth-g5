@@ -28,6 +28,17 @@ describe 'g5:export_users' do
     end
   end
 
+  it 'should use the default authorization code from the environment' do
+    expect_user_export_init_with(:authorization_code, default_auth_code)
+    task.invoke
+  end
+
+  it 'should allow the default authorization code to be overridden by an argument' do
+    auth_code_arg = 'some new auth code'
+    expect_user_export_init_with(:authorization_code, auth_code_arg)
+    task.invoke(auth_code_arg)
+  end
+
   it 'should use the default client id from the environment' do
     expect_user_export_init_with(:client_id, default_client_id)
     task.invoke
@@ -36,7 +47,7 @@ describe 'g5:export_users' do
   it 'should allow the default client id to be overridden by an argument' do
     client_id_arg = 'custom_client_id_override'
     expect_user_export_init_with(:client_id, client_id_arg)
-    task.invoke(client_id_arg)
+    task.invoke(nil, client_id_arg)
   end
 
   it 'should use the default client secret from the environment' do
@@ -47,7 +58,7 @@ describe 'g5:export_users' do
   it 'should allow the default client secret to be overridden by an argument' do
     client_secret_arg = 'custom client secret'
     expect_user_export_init_with(:client_secret, client_secret_arg)
-    task.invoke(nil, client_secret_arg)
+    task.invoke(nil, nil, client_secret_arg)
   end
 
   it 'should use the default client callback url from the environment' do
@@ -58,7 +69,7 @@ describe 'g5:export_users' do
   it 'should allow the default client callback url to be overridden by an argument' do
     client_callback_url_arg = 'http://test.localhost/custom/callback'
     expect_user_export_init_with(:client_callback_url, client_callback_url_arg)
-    task.invoke(nil, nil, client_callback_url_arg)
+    task.invoke(nil, nil, nil, client_callback_url_arg)
   end
 
   it 'should use the default auth endpoint from the environment' do
@@ -69,18 +80,7 @@ describe 'g5:export_users' do
   it 'should allow the default auth endpoint to be overridden by an argument' do
     endpoint_arg = 'https://custom-arg.auth.host'
     expect_user_export_init_with(:endpoint, endpoint_arg)
-    task.invoke(nil, nil, nil, endpoint_arg)
-  end
-
-  it 'should use the default authorization code from the environment' do
-    expect_user_export_init_with(:authorization_code, default_auth_code)
-    task.invoke
-  end
-
-  it 'should allow the default authorization code to be overridden by an argument' do
-    auth_code_arg = 'some new auth code'
-    expect_user_export_init_with(:authorization_code, auth_code_arg)
-    task.invoke(nil, nil, nil, nil, auth_code_arg)
+    task.invoke(nil, nil, nil, nil, endpoint_arg)
   end
 
   it 'should export the users' do
