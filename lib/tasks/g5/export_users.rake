@@ -4,7 +4,7 @@ namespace :g5 do
   desc "Create an auth user for each row in users table and dump id/password for update in auth server"
   task :export_users, [:client_id, :client_secret, :client_callback_url, :endpoint, :authorization_code] => :environment do |t, args|
     require 'users/user_export'
-    args.with_defaults(:client_id => 'ceed3ea0e714b9a26529d0dc752fe3d2220c7ba3d1f434a9babbb0baad814944',
+    args.with_defaults(:client_id => ENV['G5_AUTH_CLIENT_ID'],
                        :client_secret => '51f4a26a3f931739fe52e47fcebffcc4615693b49bc83fe3bea915cbe0890c3b',
                        :client_callback_url => 'urn:ietf:wg:oauth:2.0:oob',
                        :endpoint => 'http://192.168.33.1:4000/oauth',
