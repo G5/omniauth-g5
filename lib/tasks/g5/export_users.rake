@@ -7,7 +7,7 @@ namespace :g5 do
     args.with_defaults(:client_id => ENV['G5_AUTH_CLIENT_ID'],
                        :client_secret => ENV['G5_AUTH_CLIENT_SECRET'],
                        :client_callback_url => ENV['G5_AUTH_CLIENT_CALLBACK_URL'],
-                       :endpoint => 'http://192.168.33.1:4000/oauth',
+                       :endpoint => ENV['G5_AUTH_ENDPOINT'],
                        :authorization_code => '04224ef5f7c822eb3c7de51424a3d69a4923708c1684320f9d63227e81549371')
     G5::UserExport.new(args).export
   end

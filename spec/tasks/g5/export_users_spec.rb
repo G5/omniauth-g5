@@ -15,6 +15,9 @@ describe 'g5:export_users' do
   before { ENV['G5_AUTH_CLIENT_CALLBACK_URL'] = default_client_callback_url }
   let(:default_client_callback_url) { 'http://test.host/default' }
 
+  before { ENV['G5_AUTH_ENDPOINT'] = default_endpoint }
+  let(:default_endpoint) { 'https://my.g5auth.host' }
+
   def expect_user_export_init_with(option_name, expected_value)
     expect(G5::UserExport).to receive(:new) do |args|
       expect(args[option_name]).to eq(expected_value)
@@ -53,6 +56,17 @@ describe 'g5:export_users' do
     client_callback_url_arg = 'http://test.localhost/custom/callback'
     expect_user_export_init_with(:client_callback_url, client_callback_url_arg)
     task.invoke(nil, nil, client_callback_url_arg)
+  end
+
+  it 'should use the default auth endpoint from the environment' do
+    expect_user_export_init_with(:endpoint, default_endpoint)
+    task.invoke
+  end
+
+  it 'should allow the default auth endpoint to be overridden by an argument' do
+    endpoint_arg = 'https://custom-arg.auth.host'
+    expect_user_export_init_with(:endpoint, endpoint_arg)
+    task.invoke(nil, nil, nil, endpoint_arg)
   end
 
   it 'should export the users' do
