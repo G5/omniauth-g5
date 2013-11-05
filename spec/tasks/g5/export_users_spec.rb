@@ -18,6 +18,9 @@ describe 'g5:export_users' do
   before { ENV['G5_AUTH_ENDPOINT'] = default_endpoint }
   let(:default_endpoint) { 'https://my.g5auth.host' }
 
+  before { ENV['G5_AUTH_AUTHORIZATION_CODE'] = default_auth_code }
+  let(:default_auth_code) { 'default_auth_code' }
+
   def expect_user_export_init_with(option_name, expected_value)
     expect(G5::UserExport).to receive(:new) do |args|
       expect(args[option_name]).to eq(expected_value)
@@ -67,6 +70,17 @@ describe 'g5:export_users' do
     endpoint_arg = 'https://custom-arg.auth.host'
     expect_user_export_init_with(:endpoint, endpoint_arg)
     task.invoke(nil, nil, nil, endpoint_arg)
+  end
+
+  it 'should use the default authorization code from the environment' do
+    expect_user_export_init_with(:authorization_code, default_auth_code)
+    task.invoke
+  end
+
+  it 'should allow the default authorization code to be overridden by an argument' do
+    auth_code_arg = 'some new auth code'
+    expect_user_export_init_with(:authorization_code, auth_code_arg)
+    task.invoke(nil, nil, nil, nil, auth_code_arg)
   end
 
   it 'should export the users' do

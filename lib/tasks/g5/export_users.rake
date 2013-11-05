@@ -8,7 +8,7 @@ namespace :g5 do
                        :client_secret => ENV['G5_AUTH_CLIENT_SECRET'],
                        :client_callback_url => ENV['G5_AUTH_CLIENT_CALLBACK_URL'],
                        :endpoint => ENV['G5_AUTH_ENDPOINT'],
-                       :authorization_code => '04224ef5f7c822eb3c7de51424a3d69a4923708c1684320f9d63227e81549371')
+                       :authorization_code => ENV['G5_AUTH_AUTHORIZATION_CODE'])
     G5::UserExport.new(args).export
   end
 end
