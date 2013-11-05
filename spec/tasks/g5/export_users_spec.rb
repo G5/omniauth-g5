@@ -12,6 +12,9 @@ describe 'g5:export_users' do
   before { ENV['G5_AUTH_CLIENT_SECRET'] = default_client_secret }
   let(:default_client_secret) { 'default_client_secret' }
 
+  before { ENV['G5_AUTH_CLIENT_CALLBACK_URL'] = default_client_callback_url }
+  let(:default_client_callback_url) { 'http://test.host/default' }
+
   def expect_user_export_init_with(option_name, expected_value)
     expect(G5::UserExport).to receive(:new) do |args|
       expect(args[option_name]).to eq(expected_value)
@@ -39,6 +42,17 @@ describe 'g5:export_users' do
     client_secret_arg = 'custom client secret'
     expect_user_export_init_with(:client_secret, client_secret_arg)
     task.invoke(nil, client_secret_arg)
+  end
+
+  it 'should use the default client callback url from the environment' do
+    expect_user_export_init_with(:client_callback_url, default_client_callback_url)
+    task.invoke
+  end
+
+  it 'should allow the default client callback url to be overridden by an argument' do
+    client_callback_url_arg = 'http://test.localhost/custom/callback'
+    expect_user_export_init_with(:client_callback_url, client_callback_url_arg)
+    task.invoke(nil, nil, client_callback_url_arg)
   end
 
   it 'should export the users' do
