@@ -8,6 +8,6 @@ namespace :g5 do
                        :client_callback_url => ENV['G5_AUTH_CLIENT_CALLBACK_URL'],
                        :endpoint => ENV['G5_AUTH_ENDPOINT'],
                        :authorization_code => ENV['G5_AUTH_AUTHORIZATION_CODE'])
-    G5::UserExporter.new(args).export
+    puts G5::UserExporter.new(args).export
   end
 end
