@@ -12,8 +12,8 @@ describe 'g5:export_users' do
   before { ENV['G5_AUTH_CLIENT_SECRET'] = default_client_secret }
   let(:default_client_secret) { 'default_client_secret' }
 
-  before { ENV['G5_AUTH_CLIENT_CALLBACK_URL'] = default_client_callback_url }
-  let(:default_client_callback_url) { 'http://test.host/default' }
+  before { ENV['G5_AUTH_REDIRECT_URI'] = default_redirect_uri }
+  let(:default_redirect_uri) { 'http://test.host/default' }
 
   before { ENV['G5_AUTH_ENDPOINT'] = default_endpoint }
   let(:default_endpoint) { 'https://my.g5auth.host' }
@@ -61,15 +61,15 @@ describe 'g5:export_users' do
     task.invoke(nil, nil, client_secret_arg)
   end
 
-  it 'should use the default client callback url from the environment' do
-    expect_init_user_exporter_with(:client_callback_url, default_client_callback_url)
+  it 'should use the default redirect uri from the environment' do
+    expect_init_user_exporter_with(:redirect_uri, default_redirect_uri)
     task.invoke
   end
 
-  it 'should allow the default client callback url to be overridden by an argument' do
-    client_callback_url_arg = 'http://test.localhost/custom/callback'
-    expect_init_user_exporter_with(:client_callback_url, client_callback_url_arg)
-    task.invoke(nil, nil, nil, client_callback_url_arg)
+  it 'should allow the default redirect uri to be overridden by an argument' do
+    redirect_uri_arg = 'http://test.localhost/custom/callback'
+    expect_init_user_exporter_with(:redirect_uri, redirect_uri_arg)
+    task.invoke(nil, nil, nil, redirect_uri_arg)
   end
 
   it 'should use the default auth endpoint from the environment' do
