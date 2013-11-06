@@ -2,7 +2,7 @@ require 'g5_authentication_client'
 
 module G5
 
-  class UserExport
+  class UserExporter
 
     def initialize(options={})
       @client_id = options[:client_id]
