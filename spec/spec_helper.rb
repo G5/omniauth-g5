@@ -1,8 +1,10 @@
-require 'pry'
-
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start 'test_frameworks'
 
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
+
+require 'pry'
 require 'omniauth-g5'
 
 Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |f| require f }
@@ -23,4 +25,6 @@ RSpec.configure do |config|
 
   config.before { OmniAuth.config.test_mode = true }
   config.after { OmniAuth.config.test_mode = false }
+
+  config.after(:suite) { WebMock.disable! }
 end
