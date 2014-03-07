@@ -26,12 +26,12 @@ Or install it yourself as:
 
 ## Usage
 
-The strategy must be initialized with a valid application ID and application
-secret provided by the G5 auth service. For example, to use the G5 strategy
-with [devise][devise]:
+The strategy must be initialized with a valid client application ID and secret
+provided by the G5 auth service. For example, to use the G5 strategy with
+[devise][devise]:
 
     Devise.setup do |config|
-      config.omniauth :g5, ENV['G5_APP_ID'], ENV['G5_APP_SECRET']
+      config.omniauth :g5, ENV['G5_AUTH_CLIENT_ID'], ENV['G5_AUTH_CLIENT_SECRET']
     end
 
 For more general information about setting up and using OmniAuth, see the
