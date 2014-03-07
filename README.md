@@ -18,15 +18,21 @@ This is the [OmniAuth][omniauth] strategy for authenticating to G5 via
 
 Add this line to your application's Gemfile:
 
-    gem 'omniauth-g5'
+```ruby
+gem 'omniauth-g5'
+```
 
 And then execute:
 
-    $ bundle
+```console
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install omniauth-g5
+```console
+$ gem install omniauth-g5
+```
 
 ## Usage
 
@@ -34,9 +40,11 @@ The strategy must be initialized with a valid client application ID and secret
 provided by the G5 auth service. For example, to use the G5 strategy with
 [devise][devise]:
 
-    Devise.setup do |config|
-      config.omniauth :g5, ENV['G5_AUTH_CLIENT_ID'], ENV['G5_AUTH_CLIENT_SECRET']
-    end
+```ruby
+Devise.setup do |config|
+  config.omniauth :g5, ENV['G5_AUTH_CLIENT_ID'], ENV['G5_AUTH_CLIENT_SECRET']
+end
+```
 
 For more general information about setting up and using OmniAuth, see the
 [official OmniAuth documentation][omniauth-wiki].
@@ -66,7 +74,9 @@ If you find bugs, have feature requests or questions, please
 
 Just execute:
 
-    $ bundle exec rspec spec
+```console
+$ bundle exec rspec spec
+```
 
 ## License
 
