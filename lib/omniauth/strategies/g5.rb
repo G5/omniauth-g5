@@ -1,3 +1,5 @@
+require 'omniauth-oauth2'
+
 module OmniAuth
   module Strategies
     class G5 < OmniAuth::Strategies::OAuth2

@@ -1,3 +1,8 @@
+# v0.0.3 (TBD)
+
+* Moved `rake g5:export_users` task to
+  [devise_g5_authenticatable](https://github.com/g5search/devise_g5_authenticatable)
+
 # v0.0.2 (2013-11-06)
 
 * Changed `rake g5:export_users` task to read default argument values
