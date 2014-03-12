@@ -1,7 +1,8 @@
-# v0.0.3 (TBD)
+# v0.1.0 (2014-03-12)
 
 * Moved `rake g5:export_users` task to
-  [devise_g5_authenticatable](https://github.com/g5search/devise_g5_authenticatable)
+  [devise_g5_authenticatable](https://github.com/G5/devise_g5_authenticatable)
+* First open source release to [RubyGems](https://rubygems.org)
 
 # v0.0.2 (2013-11-06)
 
