@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'omniauth-g5/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "omniauth-g5"
+  gem.name          = 'omniauth-g5'
   gem.version       = OmniAuth::G5::VERSION
-  gem.authors       = ["maeve"]
-  gem.email         = ["maeve.revels@getg5.com"]
-  gem.description   = %q{OmniAuth strategy for G5}
-  gem.summary       = %q{OmniAuth strategy for G5}
-  gem.homepage      = ""
+  gem.authors       = ['Maeve Revels', 'Rob Revels']
+  gem.email         = ['maeve.revels@getg5.com', 'rob.revels@getg5.com']
+  gem.description   = 'OmniAuth strategy for G5'
+  gem.summary       = 'OmniAuth strategy for G5'
+  gem.homepage      = 'https://github.com/G5/omniauth-g5'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

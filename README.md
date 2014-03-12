@@ -68,7 +68,7 @@ For more general information about setting up and using OmniAuth, see the
 7. Create new Pull Request
 
 If you find bugs, have feature requests or questions, please
-[file an issue](https://github.com/g5search/omniauth-g5/issues).
+[file an issue](https://github.com/G5/omniauth-g5/issues).
 
 ### Specs
 
