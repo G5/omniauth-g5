@@ -89,15 +89,18 @@ describe OmniAuth::Strategies::G5 do
     subject(:extra) { strategy.extra }
     let(:parsed_response) do
       {'title' => title,
-       'organization_name' => org_name}
+       'organization_name' => org_name,
+       'roles' => roles}
     end
 
     let(:title) { 'Grand Poobah' }
     let(:org_name) { 'Test Org' }
+    let(:roles) { [{'id' => 4, 'name' => 'viewer'}] }
 
     its([:raw_info]) { is_expected.to eq(parsed_response) }
     its([:title]) { is_expected.to eq(title) }
     its([:organization_name]) { is_expected.to eq(org_name) }
+    its([:roles]) { is_expected.to eq(strategy.roles) }
   end
 
   describe '#display_name' do
@@ -131,6 +134,44 @@ describe OmniAuth::Strategies::G5 do
 
     context 'without name fields' do
       it { is_expected.to eq('') }
+    end
+  end
+
+  describe '#roles' do
+    subject(:roles) { strategy.roles }
+    let(:parsed_response) do
+      {'roles' => role_data}
+    end
+
+    context 'when roles are empty' do
+      let(:role_data) { [] }
+
+      it { is_expected.to be_empty }
+    end
+
+    context 'when there is one role' do
+      let(:role_data) { [{'id' => 4, 'name' => 'viewer'}] }
+
+      its(:count) { is_expected.to eq(1) }
+
+      it 'should return the role id as the uid' do
+        expect(roles.first[:uid]).to eq(role_data.first['id'])
+      end
+
+      it 'should return the role name' do
+        expect(roles.first[:name]).to eq(role_data.first['name'])
+      end
+    end
+
+    context 'when there are two roles' do
+      let(:role_data) do
+        [{'id' => 1, 'name' => 'super_admin'},
+         {'id' => 3, 'name' => 'editor'}]
+      end
+
+      its(:count) { is_expected.to eq(2) }
+      it { is_expected.to include({uid: 1, name: 'super_admin'}) }
+      it { is_expected.to include({uid: 3, name: 'editor'}) }
     end
   end
 end

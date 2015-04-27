@@ -24,7 +24,8 @@ module OmniAuth
       extra do
         {:raw_info => raw_info,
          :title => raw_info['title'],
-         :organization_name => raw_info['organization_name']}
+         :organization_name => raw_info['organization_name'],
+         :roles => roles}
       end
 
       def raw_info
@@ -33,6 +34,12 @@ module OmniAuth
 
       def display_name
         "#{raw_info['first_name']} #{raw_info['last_name']}".strip
+      end
+
+      def roles
+        [raw_info['roles']].flatten.collect do |role|
+          {:uid => role['id'], :name => role['name']}
+        end
       end
     end
   end
