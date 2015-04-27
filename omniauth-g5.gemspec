@@ -19,7 +19,8 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency('omniauth-oauth2', '~> 1.1')
 
-  gem.add_development_dependency('rspec', '~> 2.14')
+  gem.add_development_dependency('rspec', '~> 3.2')
+  gem.add_development_dependency('rspec-its')
   gem.add_development_dependency('simplecov', '~> 0.7')
   gem.add_development_dependency('codeclimate-test-reporter')
   gem.add_development_dependency('pry')

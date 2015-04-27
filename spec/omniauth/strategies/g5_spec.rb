@@ -12,9 +12,9 @@ describe OmniAuth::Strategies::G5 do
   let(:access_token) { double(:access_token, :get => response) }
   let(:response) { double(:response, :parsed => parsed_response) }
   let(:parsed_response) { double(:parsed_response) }
-  before { strategy.stub(:access_token => access_token) }
+  before { allow(strategy).to receive(:access_token).and_return(access_token) }
 
-  its(:name) { should == :g5 }
+  its(:name) { is_expected.to eq(:g5) }
 
   it 'should have the correct client id' do
     expect(strategy.options[:client_id]).to eq(app_id)
@@ -28,9 +28,9 @@ describe OmniAuth::Strategies::G5 do
     subject(:client_options) { strategy.options.client_options }
 
     context 'with default options' do
-      its(:site) { should == 'https://auth.g5search.com' }
-      its(:authorize_url) { should == '/oauth/authorize' }
-      its(:token_url) { should == '/oauth/token' }
+      its(:site) { is_expected.to eq('https://auth.g5search.com') }
+      its(:authorize_url) { is_expected.to eq('/oauth/authorize') }
+      its(:token_url) { is_expected.to eq('/oauth/token') }
     end
 
     context 'with partially overridden options' do
@@ -38,9 +38,9 @@ describe OmniAuth::Strategies::G5 do
         {:client_options => {:site => 'https://custom.app.com'}}
       end
 
-      its(:site) { should == 'https://custom.app.com' }
-      its(:authorize_url) { should == '/oauth/authorize' }
-      its(:token_url) { should == '/oauth/token' }
+      its(:site) { is_expected.to eq('https://custom.app.com') }
+      its(:authorize_url) { is_expected.to eq('/oauth/authorize') }
+      its(:token_url) { is_expected.to eq('/oauth/token') }
     end
   end
 
@@ -48,11 +48,11 @@ describe OmniAuth::Strategies::G5 do
     subject(:raw_info) { strategy.raw_info }
 
     it 'should retrieve the user info from the server' do
-      access_token.should_receive(:get).with('/v1/me.json').and_return(response)
+      expect(access_token).to receive(:get).with('/v1/me.json').and_return(response)
       raw_info
     end
 
-    it { should == parsed_response }
+    it { is_expected.to eq(parsed_response) }
   end
 
   describe '#uid' do
@@ -61,7 +61,7 @@ describe OmniAuth::Strategies::G5 do
       {'id' => 123}
     end
 
-    it { should == 123 }
+    it { is_expected.to eq(123) }
   end
 
   describe '#info' do
@@ -70,12 +70,12 @@ describe OmniAuth::Strategies::G5 do
       {'email' => 'test@test.com'}
     end
 
-    its([:email]) { should == 'test@test.com' }
+    its([:email]) { is_expected.to eq('test@test.com') }
   end
 
   describe '#extra' do
     subject(:extra) { strategy.extra }
 
-    its([:raw_info]) { should == parsed_response }
+    its([:raw_info]) { is_expected.to eq(parsed_response) }
   end
 end
