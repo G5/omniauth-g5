@@ -72,4 +72,10 @@ describe OmniAuth::Strategies::G5 do
 
     its([:email]) { should == 'test@test.com' }
   end
+
+  describe '#extra' do
+    subject(:extra) { strategy.extra }
+
+    its([:raw_info]) { should == parsed_response }
+  end
 end
