@@ -69,6 +69,8 @@ specifically uses the following subset of the full
     or an empty string if no name fields have been populated)
   * `first_name` - the user's first name (may be nil)
   * `last_name` - the user's last name (may be nil)
+  * `phone` - the user's phone number (may be nil; no specific formatting is
+    enforced)
 * `credentials` - information about the user's access token
   * `token` - the access token string
   * `expires` - boolean indicating whether the access token has an expiry date
@@ -88,7 +90,8 @@ For example:
   {"email"=>"test.user@test.host",
    "name"=>"Test User",
    "first_name"=>"Test",
-   "last_name"=>"User"},
+   "last_name"=>"User",
+   "phone"=>"(555) 555-5555"},
  "credentials"=>
   {"token"=>"abc123",
    "expires_at"=>1430170866,

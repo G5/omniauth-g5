@@ -69,17 +69,20 @@ describe OmniAuth::Strategies::G5 do
     let(:parsed_response) do
       {'email' => email,
        'first_name' => first_name,
-       'last_name' => last_name}
+       'last_name' => last_name,
+       'phone_number' => phone_number}
     end
 
     let(:email) { 'test@test.com' }
     let(:first_name) { 'Test' }
     let(:last_name) { 'User' }
+    let(:phone_number) { '(555) 555-5555' }
 
     its([:email]) { is_expected.to eq(email) }
     its([:name]) { is_expected.to eq("#{first_name} #{last_name}") }
     its([:first_name]) { is_expected.to eq(first_name)}
     its([:last_name]) { is_expected.to eq(last_name) }
+    its([:phone]) { is_expected.to eq(phone_number) }
   end
 
   describe '#extra' do
