@@ -14,7 +14,10 @@ module OmniAuth
       uid { raw_info['id'] }
 
       info do
-        {:email => raw_info['email']}
+        {:email => raw_info['email'],
+         :name => display_name,
+         :first_name => raw_info['first_name'],
+         :last_name => raw_info['last_name']}
       end
 
       extra do
@@ -23,6 +26,10 @@ module OmniAuth
 
       def raw_info
         @raw_info ||= access_token.get('/v1/me.json').parsed
+      end
+
+      def display_name
+        "#{raw_info['first_name']} #{raw_info['last_name']}".strip
       end
     end
   end

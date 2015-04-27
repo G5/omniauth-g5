@@ -67,15 +67,58 @@ describe OmniAuth::Strategies::G5 do
   describe '#info' do
     subject(:info) { strategy.info }
     let(:parsed_response) do
-      {'email' => 'test@test.com'}
+      {'email' => email,
+       'first_name' => first_name,
+       'last_name' => last_name}
     end
 
-    its([:email]) { is_expected.to eq('test@test.com') }
+    let(:email) { 'test@test.com' }
+    let(:first_name) { 'Test' }
+    let(:last_name) { 'User' }
+
+    its([:email]) { is_expected.to eq(email) }
+    its([:name]) { is_expected.to eq("#{first_name} #{last_name}") }
+    its([:first_name]) { is_expected.to eq(first_name)}
+    its([:last_name]) { is_expected.to eq(last_name) }
   end
 
   describe '#extra' do
     subject(:extra) { strategy.extra }
 
     its([:raw_info]) { is_expected.to eq(parsed_response) }
+  end
+
+  describe '#display_name' do
+    subject(:display_name) { strategy.display_name }
+    let(:parsed_response) do
+      {'first_name' => first_name,
+       'last_name' => last_name}
+    end
+
+    let(:first_name) {}
+    let(:last_name) {}
+
+    context 'with first and last name' do
+      let(:first_name) { 'Test' }
+      let(:last_name) { 'User' }
+
+      it { is_expected.to eq("#{first_name} #{last_name}")}
+    end
+
+    context 'with first name only' do
+      let(:first_name) { 'Test'}
+
+      it { is_expected.to eq(first_name) }
+    end
+
+    context 'with last name only' do
+      let(:last_name) { 'User' }
+
+      it { is_expected.to eq(last_name) }
+    end
+
+    context 'without name fields' do
+      it { is_expected.to eq('') }
+    end
   end
 end

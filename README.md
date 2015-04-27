@@ -65,6 +65,10 @@ specifically uses the following subset of the full
 * `uid` - the unique identifier for the authenticated user
 * `info` - a hash containing information about the user
   * `email` - the email address of the authenticated user
+  * `name` - the display name for the user (concatenated first and last names,
+    or an empty string if no name fields have been populated)
+  * `first_name` - the user's first name (may be nil)
+  * `last_name` - the user's last name (may be nil)
 * `credentials` - information about the user's access token
   * `token` - the access token string
   * `expires` - boolean indicating whether the access token has an expiry date
@@ -80,7 +84,11 @@ For example:
 ```ruby
 {"provider"=>:g5,
  "uid"=>42,
- "info"=>{"email"=>"test.user@test.host"},
+ "info"=>
+  {"email"=>"test.user@test.host",
+   "name"=>"Test User",
+   "first_name"=>"Test",
+   "last_name"=>"User"},
  "credentials"=>
   {"token"=>"abc123",
    "expires_at"=>1430170866,
