@@ -78,6 +78,10 @@ specifically uses the following subset of the full
   * `expires_at` - timestamp of the expiry time
 * `extra` - extra information returned from the auth server, including the raw
   user data and custom fields specific to G5
+  * `title` - the user's job title (may be nil)
+  * `organization_name` - the user's organization name (may be nil). This does
+    not necessarily match the G5 client name. For example, it could be the name
+    of a department or business unit within the client's organization.
   * `raw_info` - a hash representation of the full JSON response from the G5
     auth server
 
@@ -105,7 +109,9 @@ For example:
      "phone_number"=>"(555) 555-5555",
      "organization_name"=>"Test Org",
      "title"=>"Tester",
-     "roles"=>[{"id"=>4, "name"=>"viewer"}]}}}
+     "roles"=>[{"id"=>4, "name"=>"viewer"}]},
+   "title"=>"Tester",
+   "organization_name"=>"Test Org"}}
 ```
 
 ## Authors

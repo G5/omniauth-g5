@@ -87,8 +87,17 @@ describe OmniAuth::Strategies::G5 do
 
   describe '#extra' do
     subject(:extra) { strategy.extra }
+    let(:parsed_response) do
+      {'title' => title,
+       'organization_name' => org_name}
+    end
+
+    let(:title) { 'Grand Poobah' }
+    let(:org_name) { 'Test Org' }
 
     its([:raw_info]) { is_expected.to eq(parsed_response) }
+    its([:title]) { is_expected.to eq(title) }
+    its([:organization_name]) { is_expected.to eq(org_name) }
   end
 
   describe '#display_name' do

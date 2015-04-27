@@ -22,7 +22,9 @@ module OmniAuth
       end
 
       extra do
-        {:raw_info => raw_info}
+        {:raw_info => raw_info,
+         :title => raw_info['title'],
+         :organization_name => raw_info['organization_name']}
       end
 
       def raw_info
