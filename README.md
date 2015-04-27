@@ -80,12 +80,21 @@ For example:
 ```ruby
 {"provider"=>:g5,
  "uid"=>42,
- "info"=>{"email"=>"test.user@g5searchmarketing.com"},
+ "info"=>{"email"=>"test.user@test.host"},
  "credentials"=>
   {"token"=>"abc123",
    "expires_at"=>1430170866,
    "expires"=>true},
- "extra"=>{}}
+ "extra"=>
+  {"raw_info"=>
+    {"id"=>42,
+     "email"=>"test.user@test.host",
+     "first_name"=>"Test",
+     "last_name"=>"User",
+     "phone_number"=>"(555) 555-5555",
+     "organization_name"=>"Test Org",
+     "title"=>"Tester",
+     "roles"=>[{"id"=>4, "name"=>"viewer"}]}}}
 ```
 
 ## Authors
