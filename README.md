@@ -36,6 +36,8 @@ $ gem install omniauth-g5
 
 ## Usage
 
+### Configuration
+
 The strategy must be initialized with a valid client application ID and secret
 provided by the G5 auth service. For example, to use the G5 strategy with
 [devise][devise]:
@@ -51,6 +53,40 @@ For more general information about setting up and using OmniAuth, see the
 
  [devise]: https://github.com/plataformatec/devise
  [omniauth-wiki]: https://github.com/intridea/omniauth/wiki
+
+### Auth Hash
+
+After authenticating, OmniAuth returns a hash of information in the Rack
+environment under the key `omniauth.auth`. The G5 OmniAuth strategy
+specifically uses the following subset of the full
+[auth hash schema](https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema):
+
+* `provider` - this will always be set to the symbol `:g5`
+* `uid` - the unique identifier for the authenticated user
+* `info` - a hash containing information about the user
+  * `email` - the email address of the authenticated user
+* `credentials` - information about the user's access token
+  * `token` - the access token string
+  * `expires` - boolean indicating whether the access token has an expiry date
+    (always set to true for G5)
+  * `expires_at` - timestamp of the expiry time
+* `extra` - extra information returned from the auth server, including the raw
+  user data and custom fields specific to G5
+  * `raw_info` - a hash representation of the full JSON response from the G5
+    auth server
+
+For example:
+
+```ruby
+{"provider"=>:g5,
+ "uid"=>42,
+ "info"=>{"email"=>"test.user@g5searchmarketing.com"},
+ "credentials"=>
+  {"token"=>"abc123",
+   "expires_at"=>1430170866,
+   "expires"=>true},
+ "extra"=>{}}
+```
 
 ## Authors
 
