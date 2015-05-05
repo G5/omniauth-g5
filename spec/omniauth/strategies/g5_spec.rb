@@ -95,7 +95,7 @@ describe OmniAuth::Strategies::G5 do
 
     let(:title) { 'Grand Poobah' }
     let(:org_name) { 'Test Org' }
-    let(:roles) { [{'id' => 4, 'name' => 'viewer'}] }
+    let(:roles) { [{'name' => 'viewer'}] }
 
     its([:raw_info]) { is_expected.to eq(parsed_response) }
     its([:title]) { is_expected.to eq(title) }
@@ -150,13 +150,9 @@ describe OmniAuth::Strategies::G5 do
     end
 
     context 'when there is one role' do
-      let(:role_data) { [{'id' => 4, 'name' => 'viewer'}] }
+      let(:role_data) { [{'name' => 'viewer'}] }
 
       its(:count) { is_expected.to eq(1) }
-
-      it 'should return the role id as the uid' do
-        expect(roles.first[:uid]).to eq(role_data.first['id'])
-      end
 
       it 'should return the role name' do
         expect(roles.first[:name]).to eq(role_data.first['name'])
@@ -165,13 +161,13 @@ describe OmniAuth::Strategies::G5 do
 
     context 'when there are two roles' do
       let(:role_data) do
-        [{'id' => 1, 'name' => 'super_admin'},
-         {'id' => 3, 'name' => 'editor'}]
+        [{'name' => 'super_admin'},
+         {'name' => 'editor'}]
       end
 
       its(:count) { is_expected.to eq(2) }
-      it { is_expected.to include({uid: 1, name: 'super_admin'}) }
-      it { is_expected.to include({uid: 3, name: 'editor'}) }
+      it { is_expected.to include({name: 'super_admin'}) }
+      it { is_expected.to include({name: 'editor'}) }
     end
   end
 end

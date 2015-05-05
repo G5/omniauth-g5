@@ -38,7 +38,7 @@ module OmniAuth
 
       def roles
         [raw_info['roles']].flatten.collect do |role|
-          {:uid => role['id'], :name => role['name']}
+          {:name => role['name']}
         end
       end
     end
