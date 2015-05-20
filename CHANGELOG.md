@@ -1,10 +1,16 @@
-# v0.1.0 (2014-03-12)
+## v0.2.0 (2015-05-20)
+
+* Added new fields to auth hash for user name, phone, title, and organization.
+* Added user roles to the auth hash
+  ([#8](https://github.com/G5/omniauth-g5/pull/8))
+
+## v0.1.0 (2014-03-12)
 
 * Moved `rake g5:export_users` task to
   [devise_g5_authenticatable](https://github.com/G5/devise_g5_authenticatable)
 * First open source release to [RubyGems](https://rubygems.org)
 
-# v0.0.2 (2013-11-06)
+## v0.0.2 (2013-11-06)
 
 * Changed `rake g5:export_users` task to read default argument values
   from environment variables:
@@ -19,6 +25,6 @@
 * Renamed any references to the client callback URL to redirect URI, to
   maintain terminology consistent with the OAuth 2.0 specification.
 
-# v0.0.1 (2013-07-25)
+## v0.0.1 (2013-07-25)
 
 * Initial release
