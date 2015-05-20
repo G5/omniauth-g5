@@ -4,6 +4,7 @@ SimpleCov.start 'test_frameworks'
 require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
+require 'rspec/its'
 require 'pry'
 require 'omniauth-g5'
 
@@ -13,7 +14,6 @@ require 'webmock/rspec'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
 

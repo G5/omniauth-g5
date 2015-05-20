@@ -36,6 +36,8 @@ $ gem install omniauth-g5
 
 ## Usage
 
+### Configuration
+
 The strategy must be initialized with a valid client application ID and secret
 provided by the G5 auth service. For example, to use the G5 strategy with
 [devise][devise]:
@@ -51,6 +53,70 @@ For more general information about setting up and using OmniAuth, see the
 
  [devise]: https://github.com/plataformatec/devise
  [omniauth-wiki]: https://github.com/intridea/omniauth/wiki
+
+### Auth Hash
+
+After authenticating, OmniAuth returns a hash of information in the Rack
+environment under the key `omniauth.auth`. The G5 OmniAuth strategy
+specifically uses the following subset of the full
+[auth hash schema](https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema):
+
+* `provider` - this will always be set to the symbol `:g5`
+* `uid` - the unique identifier for the authenticated user
+* `info` - a hash containing information about the user
+  * `email` - the email address of the authenticated user
+  * `name` - the display name for the user (concatenated first and last names,
+    or an empty string if no name fields have been populated)
+  * `first_name` - the user's first name (may be nil)
+  * `last_name` - the user's last name (may be nil)
+  * `phone` - the user's phone number (may be nil; no specific formatting is
+    enforced)
+* `credentials` - information about the user's access token
+  * `token` - the access token string
+  * `expires` - boolean indicating whether the access token has an expiry date
+    (always set to true for G5)
+  * `expires_at` - timestamp of the expiry time
+* `extra` - extra information returned from the auth server, including the raw
+  user data and custom fields specific to G5
+  * `title` - the user's job title (may be nil)
+  * `organization_name` - the user's organization name (may be nil). This does
+    not necessarily match the G5 client name. For example, it could be the name
+    of a department or business unit within the client's organization.
+  * `roles` - the array of roles assigned to the user (may be empty)
+    * `uid` - the unique identifier of the role on the auth server
+    * `name` - the name of the role in snakecase
+  * `raw_info` - a hash representation of the full JSON response from the G5
+    auth server
+
+For example:
+
+```ruby
+{"provider"=>:g5,
+ "uid"=>42,
+ "info"=>
+  {"email"=>"test.user@test.host",
+   "name"=>"Test User",
+   "first_name"=>"Test",
+   "last_name"=>"User",
+   "phone"=>"(555) 555-5555"},
+ "credentials"=>
+  {"token"=>"abc123",
+   "expires_at"=>1430170866,
+   "expires"=>true},
+ "extra"=>
+  {"raw_info"=>
+    {"id"=>42,
+     "email"=>"test.user@test.host",
+     "first_name"=>"Test",
+     "last_name"=>"User",
+     "phone_number"=>"(555) 555-5555",
+     "organization_name"=>"Test Org",
+     "title"=>"Tester",
+     "roles"=>[{"id"=>4,"name"=>"viewer"}]},
+   "title"=>"Tester",
+   "organization_name"=>"Test Org",
+   "roles" => [{"uid"=>4,"name"=>"viewer"}]}}
+```
 
 ## Authors
 
