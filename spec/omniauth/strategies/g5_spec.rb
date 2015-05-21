@@ -150,7 +150,7 @@ describe OmniAuth::Strategies::G5 do
     end
 
     context 'when there is one role' do
-      let(:role_data) { [{'name' => 'viewer'}] }
+      let(:role_data) { [{'name' => 'viewer', 'type'=>'GLOBAL','urn'=>nil}] }
 
       its(:count) { is_expected.to eq(1) }
 
@@ -161,13 +161,13 @@ describe OmniAuth::Strategies::G5 do
 
     context 'when there are two roles' do
       let(:role_data) do
-        [{'name' => 'super_admin'},
-         {'name' => 'editor'}]
+        [{'name' => 'super_admin', 'type'=>'GLOBAL', 'urn'=>nil},
+         {'name' => 'editor', 'type'=>'G5Updatable::Client', 'urn'=>'someurn'}]
       end
 
       its(:count) { is_expected.to eq(2) }
-      it { is_expected.to include({name: 'super_admin'}) }
-      it { is_expected.to include({name: 'editor'}) }
+      it { is_expected.to include({name: 'super_admin', type: 'GLOBAL', urn:nil}) }
+      it { is_expected.to include({name: 'editor', type: 'G5Updatable::Client', urn:'someurn'}) }
     end
   end
 end

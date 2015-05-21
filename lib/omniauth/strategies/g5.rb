@@ -38,7 +38,7 @@ module OmniAuth
 
       def roles
         [raw_info['roles']].flatten.collect do |role|
-          {:name => role['name']}
+          {name: role['name'], type: role['type'], urn: role['urn']}
         end
       end
     end
