@@ -8,7 +8,7 @@ This is the [OmniAuth][omniauth] strategy for authenticating to G5 via
 
 ## Current version
 
-0.2.0
+0.3.0
 
 ## Requirements
 
@@ -83,8 +83,11 @@ specifically uses the following subset of the full
     not necessarily match the G5 client name. For example, it could be the name
     of a department or business unit within the client's organization.
   * `roles` - the array of roles assigned to the user (may be empty)
-    * `uid` - the unique identifier of the role on the auth server
     * `name` - the name of the role in snakecase
+    * `type` - the type of resource to which the role is scoped (e.g. "GLOBAL".
+      "G5Updatable::Client", "G5Updatable::Location")
+    * `urn` - the urn of the resource of which the role is scoped (may be nil
+      for global roles)
   * `raw_info` - a hash representation of the full JSON response from the G5
     auth server
 
@@ -112,10 +115,10 @@ For example:
      "phone_number"=>"(555) 555-5555",
      "organization_name"=>"Test Org",
      "title"=>"Tester",
-     "roles"=>[{"id"=>4,"name"=>"viewer"}]},
+     "roles"=>[{"name"=>"viewer","type"=>"GLOBAL","urn"=>nil}]},
    "title"=>"Tester",
    "organization_name"=>"Test Org",
-   "roles" => [{"uid"=>4,"name"=>"viewer"}]}}
+   "roles"=>[{"name"=>"viewer","type"=>"GLOBAL","urn"=>nil}]}}
 ```
 
 ## Authors

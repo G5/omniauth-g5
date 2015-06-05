@@ -1,3 +1,8 @@
+## v0.3.0 (2015-06-01)
+
+* Added resource type and urn to roles
+  ([#9](https://github.com/G5/omniauth-g5/pull/9))
+
 ## v0.2.0 (2015-05-20)
 
 * Added new fields to auth hash for user name, phone, title, and organization.
