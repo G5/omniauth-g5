@@ -17,7 +17,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency('omniauth-oauth2', '~> 1.1')
+  # Pinning version to 1.3.1 since 1.4.0 removes the `callback_url` mehtod required for our oauth workflow
+  gem.add_dependency('omniauth-oauth2', '= 1.3.1')
 
   gem.add_development_dependency('rspec', '~> 3.2')
   gem.add_development_dependency('rspec-its')
