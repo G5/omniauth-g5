@@ -1,3 +1,8 @@
+## v0.3.1 (2015-11-19)
+ * Pinned version of omniauth-auth2 to 1.3.1 since 1.4.0 removes a `callback_url`
+   method required for the Auth Workflow.
+   Expecting to be fixed by https://github.com/doorkeeper-gem/doorkeeper/issues/737
+
 ## v0.3.0 (2015-06-01)
 
 * Added resource type and urn to roles
