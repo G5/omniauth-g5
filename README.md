@@ -8,7 +8,7 @@ This is the [OmniAuth][omniauth] strategy for authenticating to G5 via
 
 ## Current version
 
-0.3.0
+0.3.1
 
 ## Requirements
 
